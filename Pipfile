@@ -10,6 +10,11 @@ bandit = "*"
 black = "*"
 
 [packages]
+fastapi = "*"
+uvicorn = "*"
+jinja2 = "*"
+aiofiles = "*"
+requests = "*"
 
 [requires]
 python_version = "3.8"
