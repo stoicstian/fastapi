@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+from enum import Enum
 from pydantic import BaseModel
 import requests
 import typing
@@ -8,14 +9,23 @@ app = FastAPI()
 db: typing.List = []
 
 
+class ModelName(str, Enum):
+    alexnet = "alexnet"
+    resnet = "resnet"
+    lenet = "lenet"
+
+
 class City(BaseModel):
+    """Ciudad del mundo."""
+
     name: str
     timezone: str
 
 
-@app.get("/")
-def index():
-    return {"key": "value"}
+@app.get("/{variable}")
+async def root(variable: str):
+    """Variable tomada desde el path or endpoint."""
+    return {"variable": variable}
 
 
 @app.get("/cities")
@@ -32,6 +42,9 @@ def get_cities():
             }
         )
     return results
+
+
+lista: typing.List[str] = ["sebastian"]
 
 
 @app.get("/cities/{city_id}")
